@@ -2,22 +2,18 @@
 
 # PRUEBA COMPLETA - Pico 2 W
 
-# Acción local + notificación fija al Webhook
-
 # ============================================================
-
-# ---------- CONFIGURACIÓN ----------
 
 $webhook = 'https://webhook.site/b3aa1247-a97d-4e0a-8f8a-6cd482da3330'
 $path = "$env:USERPROFILE\Desktop\PICO2W_TEST"
 
-# ---------- 1. CREAR CARPETA ----------
+# Crear carpeta
 
 if (!(Test-Path $path)) {
 New-Item -Path $path -ItemType Directory | Out-Null
 }
 
-# ---------- 2. CREAR INFORME ----------
+# Crear informe
 
 $fecha = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 
@@ -35,31 +31,24 @@ Resultado: EJECUCIÓN CORRECTA
 $contenido | Set-Content "$path\resultado.txt"
 "OK - prueba completada" | Set-Content "$path\OK.txt"
 
-# ---------- 3. ENVIAR AVISO FIJO AL WEBHOOK ----------
+# Enviar mensaje fijo al Webhook
 
 $mensaje = "PICO2W_TEST_OK"
 
 try {
-Invoke-WebRequest `        -UseBasicParsing`
--Uri $webhook `        -Method POST`
--Body $mensaje `
--ErrorAction Stop
-
-```
+$respuesta = Invoke-WebRequest -UseBasicParsing -Uri $webhook -Method POST -Body $mensaje -ErrorAction Stop
 $webhookResultado = "Webhook: OK"
-```
-
 }
 catch {
 $webhookResultado = "Webhook: ERROR"
 }
 
-# ---------- 4. GUARDAR RESULTADO ----------
+# Guardar resultado del Webhook
 
 Add-Content "$path\resultado.txt" ""
 Add-Content "$path\resultado.txt" $webhookResultado
 
-# ---------- 5. MOSTRAR RESULTADO ----------
+# Mostrar resultado
 
 Add-Type -AssemblyName System.Windows.Forms
 
@@ -67,3 +56,4 @@ Add-Type -AssemblyName System.Windows.Forms
 "Prueba completada.`n`nCarpeta: PICO2W_TEST`n$webhookResultado",
 "Pico 2 W - Prueba"
 )
+
