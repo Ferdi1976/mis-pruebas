@@ -1,5 +1,4 @@
-$webhook = 'TU_URL_DE_WEBHOOK'
-
+$webhook = 'https://webhook.site/3fa59b0e-4157-4c9e-a72b-4803657bd464'
 $info = [ordered]@{
     Tipo           = 'PICO2W_TEST'
     Equipo         = $env:COMPUTERNAME
